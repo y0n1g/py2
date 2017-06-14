@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from config.mylog import LOGGING
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -25,12 +28,14 @@ SECRET_KEY = 'sn(@g&m$#v&wu5#d+_-#xtew-#i!d4)ll@_+)8tj0^m%q1no&o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.79.128',]
+ALLOWED_HOSTS = [u'192.168.79.128', u'192.168.188.128',]
 
 
 # Application definition
 
 INSTALLED_APPS = (
+    #'p.apps.PConfig'
+    'p',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -87,7 +92,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
