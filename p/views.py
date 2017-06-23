@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db import transaction
+
+from django.forms.models import model_to_dict
 
 import threading, thread
 from time import sleep
 import logging
+
+
+from .models import *
+
 
 lg = logging.getLogger(__name__)
 
@@ -32,12 +39,25 @@ def test(request, op=None, var=None):
             1/0
         except ZeroDivisionError as err:
             lg.exception('')
+    elif op == 'get':
+        if not var:
+            return HttpResponse("var needed for op %s "%(op))
+        if var == 'Player':
+            msg = ''
+            ps = Player.objects.all()
+            for p in ps:
+                lg.debug(str(model_to_dict(p)))
+                msg += str(model_to_dict(p)) + '<br>'
+            return HttpResponse(msg)
+        
+        
     return HttpResponse("%s tested"%(op))
 
 
 def async_print(msg):
-    sleep(1)
-    lg.debug('in async_print: %s'%(str(msg)))
+    with transaction.atomic():
+        sleep(1)
+        lg.debug('in async_print: %s'%(str(msg)))
     
 
 class AsyncWork(threading.Thread):
