@@ -1,7 +1,4 @@
 #my files not sync
-mysql.cfg
-database.cmd
-db.sqlite3
 test_server
 migrations/
 log/

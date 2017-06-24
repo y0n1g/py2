@@ -88,6 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': os.path.join(BASE_DIR, 'config/mysql.cfg'),
+            'isolation_level' : 'read committed',
             #'read_default_file': '/home/h/git/py2/config/mysql.cnf'),
         },
     },
